@@ -1,10 +1,23 @@
+import Markdown, { type Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
 import type { ChatMessage } from "@/types/chat";
 import { Spinner } from "@/components/ui/Spinner";
 import { cn } from "@/lib/cn";
 
+const SAFE_URL_PATTERN = /^https?:\/\//;
+
+const markdownComponents: Components = {
+  a: ({ href, children }) => {
+    if (href && SAFE_URL_PATTERN.test(href)) {
+      return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
+    }
+    return <span>{children}</span>;
+  },
+};
+
 function formatTime(ts: number): string {
-  const d = new Date(ts);
-  return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  const date = new Date(ts);
+  return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
 }
 
 export function ChatMessageBubble({ message }: { message: ChatMessage }) {
@@ -20,7 +33,13 @@ export function ChatMessageBubble({ message }: { message: ChatMessage }) {
             : "glass-subtle text-hive-text",
         )}
       >
-        <p className="whitespace-pre-wrap break-words">{message.content}</p>
+        {isUser ? (
+          <p className="whitespace-pre-wrap break-words">{message.content}</p>
+        ) : (
+          <div className="chat-markdown break-words">
+            <Markdown remarkPlugins={[remarkGfm]} components={markdownComponents}>{message.content}</Markdown>
+          </div>
+        )}
 
         <div className={cn("flex items-center gap-1.5 mt-1", isUser ? "justify-end" : "justify-start")}>
           {message.status === "sending" && <Spinner className="h-3 w-3" />}

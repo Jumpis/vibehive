@@ -43,7 +43,9 @@ export const useChatStore = create<ChatState>((set, get) => ({
     }));
 
     try {
-      const mission = await submitDirectMission(agentId, content);
+      const history = get().messages[agentId] ?? [];
+      const taskWithContext = buildTaskWithContext(history, content);
+      const mission = await submitDirectMission(agentId, taskWithContext);
 
       const agentMsg: ChatMessage = {
         id: crypto.randomUUID(),
@@ -103,6 +105,20 @@ export const useChatStore = create<ChatState>((set, get) => ({
     }));
   },
 }));
+
+const MAX_CONTEXT_MESSAGES = 20;
+
+function buildTaskWithContext(history: ChatMessage[], newMessage: string): string {
+  const completed = history.filter((m) => m.status === "complete");
+  if (completed.length === 0) return newMessage;
+
+  const recent = completed.slice(-MAX_CONTEXT_MESSAGES);
+  const contextLines = recent
+    .map((m) => (m.role === "user" ? `[User]: ${m.content}` : `[Agent]: ${m.content}`))
+    .join("\n\n");
+
+  return `[Previous conversation]\n${contextLines}\n\n[Current request]\n${newMessage}`;
+}
 
 function formatMissionResult(mission: Mission): string {
   if (mission.results && mission.results.length > 0) {

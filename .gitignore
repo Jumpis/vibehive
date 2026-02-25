@@ -1,0 +1,14 @@
+.claude/settings.local.json
+.DS_Store
+.venv/
+
+# HIVE
+.env
+data/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+dist/
+node_modules/
+apps/desktop/src-tauri/target/

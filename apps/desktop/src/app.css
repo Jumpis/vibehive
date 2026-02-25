@@ -80,6 +80,59 @@
   animation: shimmer 2s linear infinite;
 }
 
+/* ── Pixel Art Animations ── */
+
+@keyframes pixel-breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes pixel-type {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-1px); }
+  75% { transform: translateY(1px); }
+}
+
+@keyframes pixel-error-flash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.5) hue-rotate(-10deg); }
+}
+
+@keyframes pixel-monitor-glow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes pixel-float {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-6px) scale(1.2); opacity: 1; }
+}
+
+@keyframes pixel-clock-tick {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.pixel-breathe {
+  animation: pixel-breathe 2.5s ease-in-out infinite;
+}
+
+.pixel-type {
+  animation: pixel-type 0.3s ease-in-out infinite;
+}
+
+.pixel-error-flash {
+  animation: pixel-error-flash 0.8s ease-in-out infinite;
+}
+
+.pixel-monitor-glow {
+  animation: pixel-monitor-glow 1.5s ease-in-out infinite;
+}
+
+.pixel-float {
+  animation: pixel-float 2s ease-in-out infinite;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

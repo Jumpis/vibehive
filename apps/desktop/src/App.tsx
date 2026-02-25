@@ -8,6 +8,7 @@ import { MissionLiveView } from "@/components/mission/MissionLiveView";
 import { MissionTimeline } from "@/components/mission/MissionTimeline";
 import { MissionResultCard } from "@/components/mission/MissionResultCard";
 import { MissionHistory } from "@/components/history/MissionHistory";
+import { OfficeView } from "@/components/office/OfficeView";
 import { useMissionStore } from "@/stores/missionStore";
 
 function MissionView() {
@@ -41,6 +42,7 @@ export default function App() {
 
   return (
     <AppShell currentView={view} onNavigate={setView}>
+      {view === "office" && <OfficeView />}
       {view === "dashboard" && <TeamDashboard />}
       {view === "mission" && <MissionView />}
       {view === "history" && <MissionHistory />}

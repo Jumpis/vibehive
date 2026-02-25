@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Sidebar } from "./Sidebar";
 import { ConnectionIndicator } from "./ConnectionIndicator";
 
-export type ViewId = "dashboard" | "mission" | "history";
+export type ViewId = "office" | "dashboard" | "mission" | "history";
 
 interface AppShellProps {
   currentView: ViewId;

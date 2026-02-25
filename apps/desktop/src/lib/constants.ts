@@ -32,6 +32,48 @@ export const AGENT_META: Record<string, AgentMeta> = {
     color: "#EC4899",
     role: "Designer",
   },
+  "review-security": {
+    id: "review-security",
+    name: "Security",
+    emoji: "🔒",
+    color: "#EF4444",
+    role: "Security Reviewer",
+  },
+  "review-readability": {
+    id: "review-readability",
+    name: "Readability",
+    emoji: "📖",
+    color: "#22C55E",
+    role: "Readability Reviewer",
+  },
+  "review-efficiency": {
+    id: "review-efficiency",
+    name: "Efficiency",
+    emoji: "⚡",
+    color: "#F97316",
+    role: "Efficiency Reviewer",
+  },
+  "review-modernization": {
+    id: "review-modernization",
+    name: "Modernize",
+    emoji: "🔄",
+    color: "#A855F7",
+    role: "Modernization Reviewer",
+  },
+  "test-agent": {
+    id: "test-agent",
+    name: "Tester",
+    emoji: "🧪",
+    color: "#14B8A6",
+    role: "Test Agent",
+  },
+  "commit-agent": {
+    id: "commit-agent",
+    name: "Committer",
+    emoji: "📝",
+    color: "#A78BFA",
+    role: "Commit Agent",
+  },
 };
 
 export const HEALTH_CHECK_INTERVAL_MS = 5_000;

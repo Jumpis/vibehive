@@ -2,6 +2,7 @@ import type { ViewId } from "./AppShell";
 import { cn } from "@/lib/cn";
 
 const NAV_ITEMS: { id: ViewId; icon: string; label: string }[] = [
+  { id: "office", icon: "🏢", label: "Office" },
   { id: "dashboard", icon: "📊", label: "Dashboard" },
   { id: "mission", icon: "🚀", label: "Mission" },
   { id: "history", icon: "📜", label: "History" },

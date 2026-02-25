@@ -2,7 +2,9 @@ import { memo, useState, useCallback } from "react";
 import { PixelCharacter } from "./PixelCharacter";
 import { PixelDesk } from "./PixelDesk";
 import { AgentTooltip } from "./AgentTooltip";
+import { ZzzParticles } from "./ZzzParticles";
 import { AGENT_META } from "@/lib/constants";
+import { useSleepTimer } from "@/hooks/useSleepTimer";
 import type { AgentInfo } from "@/types/agent";
 import { PIXEL_SCALE, CHAR_PIXEL_W, DESK_PIXEL_W } from "./pixelData/types";
 import type { AgentSeat } from "./pixelData/types";
@@ -19,14 +21,18 @@ interface AgentWorkstationProps {
 export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: AgentWorkstationProps) {
   const [showTooltip, setShowTooltip] = useState(false);
   const status = agent?.status ?? "idle";
+  const { isSleeping, wake } = useSleepTimer(status);
 
   const meta = AGENT_META[seat.id];
   const name = agent?.name ?? meta?.name ?? seat.id;
   const emoji = agent?.emoji ?? meta?.emoji ?? "🤖";
 
   const handleClick = useCallback(() => {
+    if (isSleeping) {
+      wake();
+    }
     setShowTooltip((prev) => !prev);
-  }, []);
+  }, [isSleeping, wake]);
 
   const handleClose = useCallback(() => {
     setShowTooltip(false);
@@ -58,7 +64,10 @@ export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: 
           marginBottom: -4,
         }}
       >
-        <PixelCharacter agentId={seat.id} status={status} scale={PIXEL_SCALE} />
+        <PixelCharacter agentId={seat.id} status={status} scale={PIXEL_SCALE} isSleeping={isSleeping} />
+
+        {/* Zzz particles when sleeping */}
+        {isSleeping && <ZzzParticles />}
       </div>
 
       {/* Desk */}

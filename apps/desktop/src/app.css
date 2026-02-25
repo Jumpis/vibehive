@@ -133,6 +133,28 @@
   animation: pixel-float 2s ease-in-out infinite;
 }
 
+/* ── Sleep Animations ── */
+
+@keyframes pixel-sleep-nod {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(2px) rotate(3deg); }
+}
+
+@keyframes pixel-zzz-float {
+  0% { opacity: 0; transform: translateY(0); }
+  15% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-24px); }
+}
+
+.pixel-sleep-nod {
+  animation: pixel-sleep-nod 3s ease-in-out infinite;
+  filter: brightness(0.7);
+}
+
+.pixel-zzz-float {
+  animation: pixel-zzz-float 2.4s ease-in-out infinite;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

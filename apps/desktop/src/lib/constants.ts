@@ -79,3 +79,4 @@ export const AGENT_META: Record<string, AgentMeta> = {
 export const HEALTH_CHECK_INTERVAL_MS = 5_000;
 export const WS_RECONNECT_BASE_MS = 1_000;
 export const WS_RECONNECT_MAX_MS = 30_000;
+export const SLEEP_IDLE_THRESHOLD_MS = 30_000;

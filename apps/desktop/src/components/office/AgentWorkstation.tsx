@@ -1,4 +1,4 @@
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState, useEffect, useRef } from "react";
 import { PixelCharacter } from "./PixelCharacter";
 import { PixelDesk } from "./PixelDesk";
 import { ZzzParticles } from "./ZzzParticles";
@@ -18,6 +18,8 @@ interface AgentWorkstationProps {
   agent: AgentInfo | null;
 }
 
+const EMOTE_DURATION_MS = 3000;
+
 export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: AgentWorkstationProps) {
   const status = agent?.status ?? "idle";
   const { isSleeping, wake } = useSleepTimer(status);
@@ -26,6 +28,25 @@ export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: 
   const meta = AGENT_META[seat.id];
   const name = agent?.name ?? meta?.name ?? seat.id;
   const emoji = agent?.emoji ?? meta?.emoji ?? "🤖";
+
+  const facing = seat.facing ?? "down";
+  const isFlipped = facing === "left";
+
+  // Emote bubble: show when status becomes "working", auto-hide after 3s
+  const [showEmote, setShowEmote] = useState(false);
+  const prevStatus = useRef(status);
+
+  useEffect(() => {
+    if (status === "working" && prevStatus.current !== "working") {
+      setShowEmote(true);
+      const timer = setTimeout(() => setShowEmote(false), EMOTE_DURATION_MS);
+      return () => clearTimeout(timer);
+    }
+    if (status !== "working") {
+      setShowEmote(false);
+    }
+    prevStatus.current = status;
+  }, [status]);
 
   const handleClick = useCallback(() => {
     if (isSleeping) {
@@ -53,12 +74,28 @@ export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: 
         style={{
           marginLeft: (DESK_W - CHAR_W) / 2,
           marginBottom: -4,
+          transform: isFlipped ? "scaleX(-1)" : undefined,
         }}
       >
         <PixelCharacter agentId={seat.id} status={status} scale={PIXEL_SCALE} isSleeping={isSleeping} />
 
         {/* Zzz particles when sleeping */}
         {isSleeping && <ZzzParticles />}
+
+        {/* Emote bubble when working */}
+        {showEmote && (
+          <div
+            className="emote-pop absolute pointer-events-none"
+            style={{
+              top: -16,
+              left: "50%",
+              transform: isFlipped ? "scaleX(-1) translateX(50%)" : "translateX(-50%)",
+              fontSize: 14,
+            }}
+          >
+            💻
+          </div>
+        )}
       </div>
 
       {/* Desk */}

@@ -133,6 +133,20 @@
   animation: pixel-float 2s ease-in-out infinite;
 }
 
+/* ── Emote Bubble Animation ── */
+
+@keyframes emote-pop {
+  0% { opacity: 0; transform: translateY(4px) scale(0.5); }
+  20% { opacity: 1; transform: translateY(0) scale(1.1); }
+  30% { transform: translateY(0) scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+
+.emote-pop {
+  animation: emote-pop 3s ease-out forwards;
+}
+
 /* ── Sleep Animations ── */
 
 @keyframes pixel-sleep-nod {

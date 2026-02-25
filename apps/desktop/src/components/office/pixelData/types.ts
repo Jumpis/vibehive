@@ -45,4 +45,6 @@ export interface AgentSeat {
   y: number;
   /** Row index for z-ordering (higher = closer to viewer) */
   row: number;
+  /** Character facing direction: "down" = front (default), "left" = flip, "right" = as-is */
+  facing?: "down" | "left" | "right";
 }

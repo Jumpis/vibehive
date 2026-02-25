@@ -47,6 +47,36 @@ export function OfficeRoom({ width, height }: OfficeRoomProps) {
         }}
       />
 
+      {/* Center rug */}
+      <div
+        className="absolute rounded-sm"
+        style={{
+          left: "20%",
+          top: "52%",
+          width: "50%",
+          height: "30%",
+          background: "rgba(100, 60, 160, 0.12)",
+          border: "1px solid rgba(139, 92, 246, 0.1)",
+          borderRadius: 4,
+        }}
+      />
+
+      {/* Coffee zone floor accent */}
+      <div
+        className="absolute"
+        style={{
+          right: 0,
+          top: "45%",
+          width: "18%",
+          height: "22%",
+          background: `
+            repeating-conic-gradient(#1e1540 0% 25%, #221848 0% 50%)
+            0 0 / 40px 40px`,
+          opacity: 0.5,
+          borderLeft: "1px solid rgba(139, 92, 246, 0.08)",
+        }}
+      />
+
       {/* Wall decorative line (wainscoting) */}
       <div
         className="absolute left-0 right-0"

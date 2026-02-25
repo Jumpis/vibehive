@@ -28,6 +28,13 @@ export function offsetFrame(frame: PixelFrame, dx: number, dy: number): PixelFra
 }
 
 /**
+ * Mirror a frame horizontally within a bounding box of `width` pixel columns.
+ */
+export function mirrorFrame(frame: PixelFrame, width: number): PixelFrame {
+  return frame.map((p) => ({ ...p, x: width - 1 - p.x }));
+}
+
+/**
  * Merge multiple pixel frames into one (later frames overwrite earlier on collision).
  */
 export function mergeFrames(...frames: PixelFrame[]): PixelFrame {

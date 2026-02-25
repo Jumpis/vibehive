@@ -10,7 +10,7 @@ const ZZZ_PARTICLE_OFFSET_PX = 6;
 
 export const ZzzParticles = memo(function ZzzParticles() {
   return (
-    <div className="absolute -top-2 -right-1 pointer-events-none" aria-hidden>
+    <div className="absolute top-0 right-0 pointer-events-none" aria-hidden>
       {PARTICLES.map((particle, index) => (
         <span
           key={particle.delay}

@@ -186,46 +186,46 @@ const FLOOR_PLANT_ROWS = [
 // ── Export decorations with positions ────────────────────────────
 
 export const ROOM_DECORATIONS: RoomDecoration[] = [
-  // Window (top-left area)
+  // Window (left wall — centered vertically)
   {
     pixels: parsePixelGrid(WINDOW_ROWS, WIN_PAL),
-    x: 30,
-    y: 5,
+    x: 12,
+    y: 18,
   },
-  // Whiteboard (wall center-left)
+  // Whiteboard (center-left wall)
   {
     pixels: parsePixelGrid(WHITEBOARD_ROWS, WB_PAL),
-    x: 100,
-    y: 4,
+    x: 65,
+    y: 16,
   },
-  // Clock (top-center)
+  // Clock (center wall)
   {
     pixels: parsePixelGrid(CLOCK_ROWS, CLK_PAL),
-    x: 155,
-    y: 8,
+    x: 122,
+    y: 15,
   },
-  // Plant (top-right area)
+  // Plant (center-right wall shelf)
   {
     pixels: parsePixelGrid(PLANT_ROWS, PLANT_PAL),
-    x: 195,
-    y: 6,
+    x: 160,
+    y: 14,
   },
-  // Bookshelf (far right)
+  // Bookshelf (right wall)
   {
     pixels: parsePixelGrid(BOOKSHELF_ROWS, BOOK_PAL),
-    x: 235,
-    y: 3,
+    x: 205,
+    y: 12,
   },
-  // Coffee machine (right side, above floor)
+  // Coffee machine (far right wall)
   {
     pixels: parsePixelGrid(COFFEE_ROWS, COFFEE_PAL),
-    x: 240,
-    y: 20,
+    x: 248,
+    y: 18,
   },
-  // Water cooler (right area)
+  // Water cooler (right floor area)
   {
     pixels: parsePixelGrid(WATER_ROWS, WATER_PAL),
-    x: 225,
+    x: 240,
     y: 55,
   },
   // Large floor plant (bottom-left area)

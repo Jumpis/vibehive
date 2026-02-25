@@ -30,7 +30,7 @@ export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: 
   const emoji = agent?.emoji ?? meta?.emoji ?? "🤖";
 
   const facing = seat.facing ?? "down";
-  const isFlipped = facing === "left";
+  const isMirrored = facing === "left";
 
   // Emote bubble: show when status becomes "working", auto-hide after 3s
   const [showEmote, setShowEmote] = useState(false);
@@ -68,16 +68,23 @@ export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: 
       }}
       onClick={handleClick}
     >
-      {/* Character (positioned above desk) */}
+      {/* Character (positioned above desk, or slumped onto desk when sleeping) */}
       <div
         className="relative"
         style={{
           marginLeft: (DESK_W - CHAR_W) / 2,
-          marginBottom: -4,
-          transform: isFlipped ? "scaleX(-1)" : undefined,
+          marginBottom: -12,
+          transform: isSleeping ? "translateY(20px)" : undefined,
+          transition: "transform 0.5s ease-in-out",
         }}
       >
-        <PixelCharacter agentId={seat.id} status={status} scale={PIXEL_SCALE} isSleeping={isSleeping} />
+        <PixelCharacter
+          agentId={seat.id}
+          status={status}
+          scale={PIXEL_SCALE}
+          isSleeping={isSleeping}
+          mirrored={isMirrored}
+        />
 
         {/* Zzz particles when sleeping */}
         {isSleeping && <ZzzParticles />}
@@ -89,7 +96,7 @@ export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: 
             style={{
               top: -16,
               left: "50%",
-              transform: isFlipped ? "scaleX(-1) translateX(50%)" : "translateX(-50%)",
+              transform: "translateX(-50%)",
               fontSize: 14,
             }}
           >

@@ -1,6 +1,7 @@
 import { memo, useState, useEffect, useMemo } from "react";
 import { PixelRenderer } from "./PixelRenderer";
 import { CHARACTER_SPRITES } from "./pixelData/characters";
+import { mirrorFrame } from "./pixelData/parser";
 import { CHAR_PIXEL_W, CHAR_PIXEL_H, PIXEL_SCALE } from "./pixelData/types";
 import type { PixelFrame } from "./pixelData/types";
 import type { AgentStatusValue } from "@/types/agent";
@@ -13,15 +14,20 @@ interface PixelCharacterProps {
   status: AgentStatusValue;
   scale?: number;
   isSleeping?: boolean;
+  mirrored?: boolean;
 }
 
-export const PixelCharacter = memo(function PixelCharacter({ agentId, status, scale = PIXEL_SCALE, isSleeping = false }: PixelCharacterProps) {
+export const PixelCharacter = memo(function PixelCharacter({ agentId, status, scale = PIXEL_SCALE, isSleeping = false, mirrored = false }: PixelCharacterProps) {
   const [frameIndex, setFrameIndex] = useState(0);
 
   const sprites = CHARACTER_SPRITES[agentId];
   const animation = sprites?.[status] ?? sprites?.idle;
 
-  const frames = useMemo(() => animation?.frames ?? EMPTY_FRAMES, [animation]);
+  const rawFrames = useMemo(() => animation?.frames ?? EMPTY_FRAMES, [animation]);
+  const frames = useMemo(
+    () => mirrored ? rawFrames.map((f) => mirrorFrame(f, CHAR_PIXEL_W)) : rawFrames,
+    [rawFrames, mirrored],
+  );
   const baseDuration = animation?.frameDuration ?? 800;
   const frameDuration = isSleeping ? baseDuration * 2 : baseDuration;
 

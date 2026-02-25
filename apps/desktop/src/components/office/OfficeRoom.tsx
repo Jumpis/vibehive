@@ -20,7 +20,7 @@ export function OfficeRoom({ width, height }: OfficeRoomProps) {
       <div
         className="absolute top-0 left-0 right-0"
         style={{
-          height: "45%",
+          height: "30%",
           background: "linear-gradient(180deg, #1e1540 0%, #251a50 60%, #2a1d58 100%)",
           borderBottom: "3px solid #3d2d70",
         }}
@@ -30,7 +30,7 @@ export function OfficeRoom({ width, height }: OfficeRoomProps) {
       <div
         className="absolute bottom-0 left-0 right-0"
         style={{
-          height: "55%",
+          height: "70%",
           background: `
             repeating-conic-gradient(#1a1335 0% 25%, #1e1640 0% 50%)
             0 0 / 40px 40px`,
@@ -42,7 +42,7 @@ export function OfficeRoom({ width, height }: OfficeRoomProps) {
       <div
         className="absolute bottom-0 left-0 right-0"
         style={{
-          height: "55%",
+          height: "70%",
           background: "linear-gradient(180deg, transparent 0%, rgba(30, 20, 60, 0.4) 100%)",
         }}
       />
@@ -51,10 +51,10 @@ export function OfficeRoom({ width, height }: OfficeRoomProps) {
       <div
         className="absolute rounded-sm"
         style={{
-          left: "20%",
-          top: "52%",
-          width: "50%",
-          height: "30%",
+          left: "15%",
+          top: "45%",
+          width: "55%",
+          height: "38%",
           background: "rgba(100, 60, 160, 0.12)",
           border: "1px solid rgba(139, 92, 246, 0.1)",
           borderRadius: 4,
@@ -66,9 +66,9 @@ export function OfficeRoom({ width, height }: OfficeRoomProps) {
         className="absolute"
         style={{
           right: 0,
-          top: "45%",
+          top: "30%",
           width: "18%",
-          height: "22%",
+          height: "25%",
           background: `
             repeating-conic-gradient(#1e1540 0% 25%, #221848 0% 50%)
             0 0 / 40px 40px`,
@@ -81,7 +81,7 @@ export function OfficeRoom({ width, height }: OfficeRoomProps) {
       <div
         className="absolute left-0 right-0"
         style={{
-          top: "43%",
+          top: "28%",
           height: "4px",
           background: "linear-gradient(90deg, #3d2d70, #5b3fa0, #3d2d70)",
           opacity: 0.6,

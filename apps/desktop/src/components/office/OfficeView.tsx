@@ -8,21 +8,21 @@ const BASE_W = 800;
 const BASE_H = 500;
 
 const SEATS: AgentSeat[] = [
-  // ── Back cluster (y ~55-80) — Leader + core ──
-  { id: "bolt",   x: 60,  y: 55,  row: 0, facing: "right" },
-  { id: "leader", x: 290, y: 60,  row: 0, facing: "down"  },
-  { id: "sage",   x: 520, y: 55,  row: 0, facing: "left"  },
+  // ── Back cluster — Leader + core (near the wall) ──
+  { id: "bolt",   x: 60,  y: 155, row: 0, facing: "right" },
+  { id: "leader", x: 290, y: 160, row: 0, facing: "down"  },
+  { id: "sage",   x: 520, y: 155, row: 0, facing: "left"  },
 
-  // ── Middle cluster (y ~170-200) — Designer + reviewers ──
-  { id: "pixel",              x: 80,  y: 175, row: 1, facing: "down"  },
-  { id: "review-readability", x: 310, y: 185, row: 1, facing: "down"  },
-  { id: "review-security",    x: 550, y: 170, row: 1, facing: "left"  },
+  // ── Middle cluster — Designer + reviewers (mid-floor) ──
+  { id: "pixel",              x: 80,  y: 250, row: 1, facing: "down"  },
+  { id: "review-readability", x: 310, y: 260, row: 1, facing: "down"  },
+  { id: "review-security",    x: 550, y: 250, row: 1, facing: "left"  },
 
-  // ── Front cluster (y ~300-330) — Review + ops ──
-  { id: "review-modernization", x: 50,  y: 305, row: 2, facing: "right" },
-  { id: "test-agent",           x: 270, y: 310, row: 2, facing: "down"  },
-  { id: "review-efficiency",    x: 480, y: 300, row: 2, facing: "left"  },
-  { id: "commit-agent",         x: 650, y: 315, row: 2, facing: "left"  },
+  // ── Front cluster — Review + ops (front floor) ──
+  { id: "review-modernization", x: 50,  y: 345, row: 2, facing: "right" },
+  { id: "test-agent",           x: 270, y: 350, row: 2, facing: "down"  },
+  { id: "review-efficiency",    x: 480, y: 345, row: 2, facing: "left"  },
+  { id: "commit-agent",         x: 650, y: 350, row: 2, facing: "left"  },
 ];
 
 export function OfficeView() {

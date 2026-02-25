@@ -12,3 +12,6 @@ __pycache__/
 dist/
 node_modules/
 apps/desktop/src-tauri/target/
+*.tsbuildinfo
+vite.config.d.ts
+vite.config.js

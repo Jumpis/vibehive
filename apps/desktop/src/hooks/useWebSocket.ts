@@ -3,7 +3,9 @@ import { WS_URL, WS_RECONNECT_BASE_MS, WS_RECONNECT_MAX_MS } from "@/lib/constan
 import { useConnectionStore } from "@/stores/connectionStore";
 import { useAgentStore } from "@/stores/agentStore";
 import { useMissionStore } from "@/stores/missionStore";
+import { useChatStore } from "@/stores/chatStore";
 import type { WSEvent } from "@/types/websocket";
+import type { Mission } from "@/types/mission";
 
 export function useWebSocket() {
   const wsRef = useRef<WebSocket | null>(null);
@@ -49,6 +51,13 @@ export function useWebSocket() {
               status: d.status as "idle" | "working" | "error",
               current_task: d.current_task ?? null,
             });
+          }
+
+          if (event.type === "mission_completed") {
+            const mission = event.data as Mission;
+            if (mission.type === "direct") {
+              useChatStore.getState().addAgentResponse(mission);
+            }
           }
 
           handleWSEvent(event.type, event.data);

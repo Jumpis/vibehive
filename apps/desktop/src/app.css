@@ -155,6 +155,17 @@
   animation: pixel-zzz-float 2.4s ease-in-out infinite;
 }
 
+/* ── Chat Panel Slide ── */
+
+@keyframes slide-in-panel {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-slide-in-panel {
+  animation: slide-in-panel 0.25s ease-out forwards;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

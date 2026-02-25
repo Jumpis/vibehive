@@ -2,6 +2,7 @@ import type { AgentInfo } from "@/types/agent";
 import { AGENT_META } from "@/lib/constants";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { StatusBadge } from "@/components/ui/StatusBadge";
+import { useChatStore } from "@/stores/chatStore";
 
 interface AgentCardProps {
   agentId: string;
@@ -11,8 +12,10 @@ interface AgentCardProps {
 export function AgentCard({ agentId, agent }: AgentCardProps) {
   const meta = AGENT_META[agentId];
   const color = meta?.color ?? "#8b5cf6";
+  const openChat = useChatStore((s) => s.openChat);
 
   return (
+    <div onClick={() => openChat(agentId)} className="cursor-pointer">
     <GlassPanel glowColor={agent.status === "working" ? color : undefined} className="p-4">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2">
@@ -45,5 +48,6 @@ export function AgentCard({ agentId, agent }: AgentCardProps) {
         )}
       </div>
     </GlassPanel>
+    </div>
   );
 }

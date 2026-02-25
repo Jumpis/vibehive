@@ -1,10 +1,10 @@
-import { memo, useState, useCallback } from "react";
+import { memo, useCallback } from "react";
 import { PixelCharacter } from "./PixelCharacter";
 import { PixelDesk } from "./PixelDesk";
-import { AgentTooltip } from "./AgentTooltip";
 import { ZzzParticles } from "./ZzzParticles";
 import { AGENT_META } from "@/lib/constants";
 import { useSleepTimer } from "@/hooks/useSleepTimer";
+import { useChatStore } from "@/stores/chatStore";
 import type { AgentInfo } from "@/types/agent";
 import { PIXEL_SCALE, CHAR_PIXEL_W, DESK_PIXEL_W } from "./pixelData/types";
 import type { AgentSeat } from "./pixelData/types";
@@ -19,9 +19,9 @@ interface AgentWorkstationProps {
 }
 
 export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: AgentWorkstationProps) {
-  const [showTooltip, setShowTooltip] = useState(false);
   const status = agent?.status ?? "idle";
   const { isSleeping, wake } = useSleepTimer(status);
+  const openChat = useChatStore((s) => s.openChat);
 
   const meta = AGENT_META[seat.id];
   const name = agent?.name ?? meta?.name ?? seat.id;
@@ -31,12 +31,8 @@ export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: 
     if (isSleeping) {
       wake();
     }
-    setShowTooltip((prev) => !prev);
-  }, [isSleeping, wake]);
-
-  const handleClose = useCallback(() => {
-    setShowTooltip(false);
-  }, []);
+    openChat(seat.id);
+  }, [isSleeping, wake, openChat, seat.id]);
 
   return (
     <div
@@ -51,11 +47,6 @@ export const AgentWorkstation = memo(function AgentWorkstation({ seat, agent }: 
       }}
       onClick={handleClick}
     >
-      {/* Tooltip */}
-      {showTooltip && (
-        <AgentTooltip agentId={seat.id} agent={agent} onClose={handleClose} />
-      )}
-
       {/* Character (positioned above desk) */}
       <div
         className="relative"

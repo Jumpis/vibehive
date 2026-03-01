@@ -67,6 +67,9 @@ class AgentLoader:
         if not frontmatter or "name" not in frontmatter:
             return None
 
+        if not self._is_enabled(frontmatter.get("enabled", True)):
+            return None
+
         # Body = system prompt
         body = "---".join(parts[2:]).strip()
         agent_name = frontmatter["name"]
@@ -103,6 +106,14 @@ class AgentLoader:
             source=AgentSource.CLAUDE_AGENTS,
             source_file=filepath,
         )
+
+    def _is_enabled(self, value: object) -> bool:
+        """frontmatter의 enabled 값을 느슨하게 해석"""
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            return value.strip().lower() not in {"false", "0", "no", "off"}
+        return bool(value)
 
     def _detect_constraints(self, agent_name: str, body: str) -> list[str]:
         """에이전트 내용에서 관련 rule 파일 자동 감지"""

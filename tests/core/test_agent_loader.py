@@ -1,9 +1,5 @@
 """Agent Loader 테스트"""
 
-import os
-import tempfile
-import pytest
-
 from packages.core.claude_bridge.agent_loader import AgentLoader
 
 
@@ -40,3 +36,42 @@ System prompt for {name}.
         loader = AgentLoader(str(tmp_path))
         agents = loader.load_all()
         assert len(agents) == 2
+
+    def test_parse_agent_file_skips_disabled_agent(self, tmp_path):
+        agent_md = tmp_path / "disabled-agent.md"
+        agent_md.write_text("""---
+name: disabled-agent
+description: Disabled agent
+enabled: false
+---
+
+You should not see this agent.
+""")
+        loader = AgentLoader(str(tmp_path))
+
+        config = loader.parse_agent_file(str(agent_md))
+
+        assert config is None
+
+    def test_load_all_skips_disabled_agents(self, tmp_path):
+        (tmp_path / "agent-a.md").write_text("""---
+name: agent-a
+description: Agent A
+---
+
+System prompt for agent-a.
+""")
+        (tmp_path / "agent-b.md").write_text("""---
+name: agent-b
+description: Agent B
+enabled: false
+---
+
+System prompt for agent-b.
+""")
+        loader = AgentLoader(str(tmp_path))
+
+        agents = loader.load_all()
+
+        assert len(agents) == 1
+        assert agents[0].id == "agent-a"

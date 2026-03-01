@@ -18,20 +18,66 @@
   --color-status-error: #ef4444;
 }
 
+:root,
+[data-theme="dark"] {
+  --hive-shell-bg: linear-gradient(135deg, #0f0a1e 0%, #150d2e 45%, #1a0f35 100%);
+  --hive-glass-bg: rgba(26, 16, 48, 0.6);
+  --hive-glass-subtle-bg: rgba(26, 16, 48, 0.35);
+  --hive-glass-border: rgba(255, 255, 255, 0.08);
+  --hive-glass-border-subtle: rgba(255, 255, 255, 0.05);
+  --hive-inline-code-bg: rgba(255, 255, 255, 0.08);
+  --hive-pre-bg: rgba(0, 0, 0, 0.3);
+  --hive-pre-border: rgba(255, 255, 255, 0.06);
+  --hive-table-border: rgba(255, 255, 255, 0.1);
+  --hive-table-head-bg: rgba(255, 255, 255, 0.05);
+  --hive-hr-border: rgba(255, 255, 255, 0.08);
+  --hive-scroll-thumb: rgba(255, 255, 255, 0.1);
+  --hive-scroll-thumb-hover: rgba(255, 255, 255, 0.2);
+  --hive-selection-bg: rgba(167, 139, 250, 0.3);
+}
+
+[data-theme="light"] {
+  --color-hive-bg: #f4f6fb;
+  --color-hive-surface: #ffffff;
+  --color-hive-border: rgba(30, 41, 59, 0.14);
+  --color-hive-text: #1f2937;
+  --color-hive-text-dim: #64748b;
+  --color-hive-accent: #7c3aed;
+
+  --hive-shell-bg: linear-gradient(135deg, #eef2ff 0%, #f8fafc 45%, #eef6ff 100%);
+  --hive-glass-bg: rgba(255, 255, 255, 0.78);
+  --hive-glass-subtle-bg: rgba(255, 255, 255, 0.62);
+  --hive-glass-border: rgba(30, 41, 59, 0.12);
+  --hive-glass-border-subtle: rgba(30, 41, 59, 0.08);
+  --hive-inline-code-bg: rgba(15, 23, 42, 0.08);
+  --hive-pre-bg: rgba(241, 245, 249, 0.95);
+  --hive-pre-border: rgba(30, 41, 59, 0.12);
+  --hive-table-border: rgba(30, 41, 59, 0.16);
+  --hive-table-head-bg: rgba(226, 232, 240, 0.7);
+  --hive-hr-border: rgba(30, 41, 59, 0.14);
+  --hive-scroll-thumb: rgba(100, 116, 139, 0.35);
+  --hive-scroll-thumb-hover: rgba(100, 116, 139, 0.5);
+  --hive-selection-bg: rgba(124, 58, 237, 0.2);
+}
+
+.app-shell-bg {
+  background: var(--hive-shell-bg);
+}
+
 /* Glassmorphism base */
 .glass {
-  background: rgba(26, 16, 48, 0.6);
+  background: var(--hive-glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--hive-glass-border);
   border-radius: 12px;
 }
 
 .glass-subtle {
-  background: rgba(26, 16, 48, 0.35);
+  background: var(--hive-glass-subtle-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--hive-glass-border-subtle);
   border-radius: 8px;
 }
 
@@ -201,7 +247,7 @@
 }
 
 .chat-markdown code {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--hive-inline-code-bg);
   padding: 0.15em 0.35em;
   border-radius: 4px;
   font-size: 0.85em;
@@ -209,8 +255,8 @@
 }
 
 .chat-markdown pre {
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--hive-pre-bg);
+  border: 1px solid var(--hive-pre-border);
   border-radius: 6px;
   padding: 0.6em 0.8em;
   margin: 0.5em 0;
@@ -248,19 +294,19 @@
 }
 
 .chat-markdown th, .chat-markdown td {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--hive-table-border);
   padding: 0.3em 0.6em;
   text-align: left;
 }
 
 .chat-markdown th {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hive-table-head-bg);
   font-weight: 600;
 }
 
 .chat-markdown hr {
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--hive-hr-border);
   margin: 0.6em 0;
 }
 
@@ -288,12 +334,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hive-scroll-thumb);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--hive-scroll-thumb-hover);
 }
 
 /* Base */
@@ -306,5 +352,5 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(167, 139, 250, 0.3);
+  background: var(--hive-selection-bg);
 }

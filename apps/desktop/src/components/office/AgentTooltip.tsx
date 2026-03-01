@@ -90,7 +90,11 @@ export function AgentTooltip({ agentId, agent, onClose }: AgentTooltipProps) {
         {/* Arrow pointer */}
         <div
           className="absolute left-1/2 -translate-x-1/2 -bottom-1.5 w-3 h-3 rotate-45"
-          style={{ background: "rgba(26, 16, 48, 0.6)", borderRight: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+          style={{
+            background: "var(--hive-glass-bg)",
+            borderRight: "1px solid var(--hive-glass-border)",
+            borderBottom: "1px solid var(--hive-glass-border)",
+          }}
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useWebSocket } from "@/hooks/useWebSocket";
 import { useHealthCheck } from "@/hooks/useHealthCheck";
 import { AppShell, type ViewId } from "@/components/layout/AppShell";
@@ -37,13 +37,27 @@ function MissionView() {
 
 export default function App() {
   const [view, setView] = useState<ViewId>("dashboard");
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    const saved = localStorage.getItem("hive-theme");
+    return saved === "light" ? "light" : "dark";
+  });
 
   useWebSocket();
   useHealthCheck();
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("hive-theme", theme);
+  }, [theme]);
+
   return (
     <>
-      <AppShell currentView={view} onNavigate={setView}>
+      <AppShell
+        currentView={view}
+        onNavigate={setView}
+        theme={theme}
+        onToggleTheme={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
+      >
         {view === "office" && <OfficeView />}
         {view === "dashboard" && <TeamDashboard />}
         {view === "mission" && <MissionView />}

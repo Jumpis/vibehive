@@ -7,12 +7,14 @@ export type ViewId = "office" | "dashboard" | "mission" | "history";
 interface AppShellProps {
   currentView: ViewId;
   onNavigate: (view: ViewId) => void;
+  theme: "dark" | "light";
+  onToggleTheme: () => void;
   children: ReactNode;
 }
 
-export function AppShell({ currentView, onNavigate, children }: AppShellProps) {
+export function AppShell({ currentView, onNavigate, theme, onToggleTheme, children }: AppShellProps) {
   return (
-    <div className="h-screen w-screen flex flex-col overflow-hidden bg-gradient-to-br from-[#0f0a1e] via-[#150d2e] to-[#1a0f35]">
+    <div className="h-screen w-screen flex flex-col overflow-hidden app-shell-bg">
       {/* Top bar */}
       <header className="flex items-center justify-between px-5 py-3 border-b border-hive-border shrink-0">
         <div className="flex items-center gap-2.5">
@@ -24,7 +26,18 @@ export function AppShell({ currentView, onNavigate, children }: AppShellProps) {
             Agent Orchestration
           </span>
         </div>
-        <ConnectionIndicator />
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={onToggleTheme}
+            className="text-xs px-2.5 py-1.5 rounded-md border border-hive-border text-hive-text-dim hover:text-hive-text hover:bg-white/5 transition-colors"
+            aria-label="Toggle color theme"
+            title={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}
+          >
+            {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+          </button>
+          <ConnectionIndicator />
+        </div>
       </header>
 
       {/* Body */}

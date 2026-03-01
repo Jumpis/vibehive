@@ -1,0 +1,66 @@
+<!-- HIVE Logo - Concept C: Dynamic Grid -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 80" width="310" height="80">
+  <defs>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981"/>
+      <stop offset="50%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#8B5CF6"/>
+    </linearGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Grid squares - 4x4 arrangement with strategic gaps -->
+  <!-- Row 1 -->
+  <rect x="8"  y="8"  width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="1.0"/>
+  <rect x="21" y="8"  width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="0.7"/>
+  <rect x="34" y="8"  width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="0.4"/>
+
+  <!-- Row 2 -->
+  <rect x="8"  y="21" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="0.8"/>
+  <rect x="21" y="21" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="1.0" filter="url(#softGlow)"/>
+  <rect x="34" y="21" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="0.8"/>
+  <rect x="47" y="21" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="0.3"/>
+
+  <!-- Row 3 -->
+  <rect x="8"  y="34" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="0.5"/>
+  <rect x="21" y="34" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="0.9"/>
+  <rect x="34" y="34" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="1.0" filter="url(#softGlow)"/>
+  <rect x="47" y="34" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="0.6"/>
+
+  <!-- Row 4 -->
+  <rect x="21" y="47" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="0.3"/>
+  <rect x="34" y="47" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="0.7"/>
+  <rect x="47" y="47" width="10" height="10" rx="2" fill="url(#emeraldGrad)" opacity="1.0"/>
+
+  <!-- Connecting lines between bright nodes -->
+  <line x1="31" y1="26" x2="39" y2="26" stroke="url(#emeraldGrad)" stroke-width="0.6" opacity="0.4"/>
+  <line x1="26" y1="31" x2="26" y2="34" stroke="url(#emeraldGrad)" stroke-width="0.6" opacity="0.4"/>
+  <line x1="39" y1="39" x2="47" y2="39" stroke="url(#emeraldGrad)" stroke-width="0.6" opacity="0.4"/>
+
+  <!-- Wordmark -->
+  <text
+    x="74"
+    y="36"
+    font-family="'JetBrains Mono', 'Fira Code', 'Courier New', monospace"
+    font-size="28"
+    font-weight="700"
+    letter-spacing="3"
+    fill="url(#emeraldGrad)"
+  >HIVE</text>
+
+  <text
+    x="75"
+    y="51"
+    font-family="'JetBrains Mono', 'Fira Code', monospace"
+    font-size="8"
+    font-weight="400"
+    letter-spacing="4"
+    fill="#64748B"
+  >v2.0 // SYSTEM</text>
+</svg>

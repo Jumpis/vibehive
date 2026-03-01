@@ -1,0 +1,52 @@
+<!-- HIVE Logo - Concept B: Minimal Mark -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" width="300" height="80">
+  <defs>
+    <linearGradient id="indigoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366F1"/>
+      <stop offset="100%" style="stop-color:#8B5CF6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background square with rounded corners -->
+  <rect x="8" y="8" width="52" height="52" rx="10" ry="10"
+    fill="#1E293B"
+  />
+
+  <!-- H letterform - left vertical -->
+  <rect x="18" y="18" width="8" height="32" rx="2" fill="url(#indigoGrad)"/>
+
+  <!-- H letterform - right vertical -->
+  <rect x="42" y="18" width="8" height="32" rx="2" fill="url(#indigoGrad)"/>
+
+  <!-- H letterform - crossbar -->
+  <rect x="26" y="30" width="16" height="6" rx="1.5" fill="url(#indigoGrad)"/>
+
+  <!-- Subtle corner accents -->
+  <rect x="8" y="8" width="4" height="4" rx="1" fill="#6366F1" opacity="0.5"/>
+  <rect x="56" y="56" width="4" height="4" rx="1" fill="#8B5CF6" opacity="0.5"/>
+
+  <!-- Wordmark -->
+  <text
+    x="76"
+    y="38"
+    font-family="'Inter', 'SF Pro Display', Helvetica, sans-serif"
+    font-size="30"
+    font-weight="700"
+    letter-spacing="2"
+    fill="#1E293B"
+  >HIVE</text>
+
+  <!-- Minimal dot accent -->
+  <circle cx="72" cy="38" r="2.5" fill="#6366F1"/>
+
+  <!-- Version label -->
+  <text
+    x="77"
+    y="52"
+    font-family="'Inter', Helvetica, sans-serif"
+    font-size="9"
+    font-weight="300"
+    letter-spacing="5"
+    fill="#94A3B8"
+  >SYSTEM</text>
+</svg>

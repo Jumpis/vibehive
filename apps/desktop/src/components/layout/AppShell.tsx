@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Sidebar } from "./Sidebar";
 import { ConnectionIndicator } from "./ConnectionIndicator";
+import { HiveLogo } from "./HiveLogo";
 
 export type ViewId = "office" | "dashboard" | "mission" | "history";
 
@@ -18,12 +19,12 @@ export function AppShell({ currentView, onNavigate, theme, onToggleTheme, childr
       {/* Top bar */}
       <header className="flex items-center justify-between px-5 py-3 border-b border-hive-border shrink-0">
         <div className="flex items-center gap-2.5">
-          <span className="text-lg">🐝</span>
-          <h1 className="text-sm font-semibold tracking-wide text-hive-text">
+          <HiveLogo size={28} />
+          <h1 className="text-sm font-extrabold tracking-widest bg-gradient-to-r from-[#7C3AED] to-[#06B6D4] bg-clip-text text-transparent">
             HIVE
           </h1>
           <span className="text-[10px] text-hive-text-dim font-medium tracking-wider uppercase">
-            Agent Orchestration
+            AI Agent System
           </span>
         </div>
         <div className="flex items-center gap-2">

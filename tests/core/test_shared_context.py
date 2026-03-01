@@ -44,8 +44,29 @@ class TestContextStrategies:
 
     def test_summary_strategy(self, populated_context):
         text = populated_context.to_text(strategy="summary", max_tokens=50000, summary_chars=100)
-        assert "요약됨" in text  # 잘렸다는 표시
+        assert "[TRUNCATED]" in text  # 새 잘림 표시 확인
         assert len(text) < len(populated_context.to_text(strategy="full", max_tokens=50000))
+
+    def test_smart_truncate_line_boundary(self):
+        """줄 바꿈 경계에서 잘리는지 확인"""
+        from packages.core.context.shared_pool import _smart_truncate
+        text = "Line 1\nLine 2\nLine 3"
+        # 'Line 1\nLine 2' 는 13자. 14자로 자르면 Line 2 뒤의 \n에서 잘려야 함
+        truncated = _smart_truncate(text, 14)
+        assert "Line 2" in truncated
+        assert "Line 3" not in truncated
+        assert truncated.startswith("Line 1\nLine 2\n...")
+
+    def test_smart_truncate_code_fence(self):
+        """코드 펜스가 닫히는지 확인"""
+        from packages.core.context.shared_pool import _smart_truncate
+        text = "Check this code:\n```python\nprint('hello')\nprint('world')\n```"
+        # 'Check this code:\n```python\nprin' 까지가 약 35자
+        truncated = _smart_truncate(text, 35)
+        assert "```" in truncated
+        # 펜스가 열린 채 잘렸으므로 닫는 ```가 추가되어야 함 (총 2세트의 ``` 가 있어야 함)
+        assert truncated.count("```") % 2 == 0
+        assert "```\n... [TRUNCATED]" in truncated
 
     def test_latest_only_strategy(self, populated_context):
         text = populated_context.to_text(strategy="latest_only", max_tokens=50000)

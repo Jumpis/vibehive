@@ -20,6 +20,36 @@ def _estimate_tokens(text: str) -> int:
     return max(1, int(len(text) / chars_per_token))
 
 
+def _smart_truncate(text: str, max_chars: int, suffix: str = "\n... [TRUNCATED]") -> str:
+    """
+    구조를 유지하며 텍스트를 자름.
+    - 줄 바꿈 경계 선호
+    - Markdown code fence (```) 닫기 보장
+    - 잘림 표시 추가
+    """
+    if not text or len(text) <= max_chars:
+        return text
+
+    # 1. 일차 절단
+    truncated = text[:max_chars]
+
+    # 2. 줄 바꿈 경계 찾기 (마지막 20% 범위 내에서)
+    lookback_limit = int(max_chars * 0.8)
+    last_newline = truncated.rfind("\n")
+    if last_newline != -1 and last_newline > lookback_limit:
+        truncated = truncated[:last_newline]
+
+    # 3. Markdown Code Fence 대응
+    # ``` 개수가 홀수면 열린 채로 잘린 것이므로 닫아줌
+    if truncated.count("```") % 2 != 0:
+        # 이미 줄바꿈으로 끝난 게 아니라면 줄바꿈 추가
+        if not truncated.endswith("\n"):
+            truncated += "\n"
+        truncated += "```"
+
+    return truncated + suffix
+
+
 @dataclass
 class ContextEntry:
     agent_id: str
@@ -125,10 +155,12 @@ class SharedContext:
         running_tokens = 0
 
         for entry in entries:
-            # 결과 요약 (글자수 제한)
-            summarized = entry.result[:summary_chars]
-            if len(entry.result) > summary_chars:
-                summarized += f"\n... (원본 {entry.result_tokens} tokens, 요약됨)"
+            # 결과 요약 (스마트 절단)
+            summarized = _smart_truncate(
+                entry.result,
+                summary_chars,
+                suffix=f"\n... (원본 {entry.result_tokens} tokens, 요약됨 [TRUNCATED])",
+            )
 
             part = self._format_entry(entry, summarized)
             part_tokens = _estimate_tokens(part)
@@ -159,12 +191,16 @@ class SharedContext:
         latest = entries[-1]
         text = latest.result
 
-        # 그래도 예산 초과하면 잘라냄
+        # 그래도 예산 초과하면 스마트 절단
         text_tokens = _estimate_tokens(text)
         if text_tokens > max_tokens:
             # 대략적으로 글자수 제한
             char_limit = int(max_tokens * 3)  # ~3 chars/token
-            text = text[:char_limit] + f"\n... (원본 {text_tokens} tokens, 잘림)"
+            text = _smart_truncate(
+                text,
+                char_limit,
+                suffix=f"\n... (원본 {text_tokens} tokens, 잘림 [TRUNCATED])",
+            )
 
         result = self._format_entry(latest, text)
         logger.info(

@@ -18,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "INPUT=$(cat); CMD=$(echo \"$INPUT\" | jq -r '.tool_input.command // empty'); if echo \"$CMD\" | grep -qE '^git commit'; then echo 'BLOCKED: git commit 직접 사용 금지. /commit 커맨드를 사용하세요. 워크플로우: /review → /test → /commit' >&2; exit 2; fi; exit 0",
+            "command": "INPUT=$(cat); CMD=$(echo \"$INPUT\" | jq -r '.tool_input.command // empty'); if echo \"$CMD\" | grep -qE '^git commit' && ! echo \"$CMD\" | grep -qE '\\-\\-amend'; then echo 'BLOCKED: git commit 직접 사용 금지. /commit 커맨드를 사용하세요. 워크플로우: /review → /test → /commit' >&2; exit 2; fi; exit 0",
             "timeout": 10
           }
         ]

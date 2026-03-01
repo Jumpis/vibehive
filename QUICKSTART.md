@@ -48,6 +48,7 @@ chmod +x setup-orchestrator.sh
 - `.claude/rules/` — style.md, security.md 규칙
 - `.claude/settings.json` — git commit 차단 hook
 - `CLAUDE.md` — 프로젝트 설정
+- `AGENTS.md`, `GEMINI.md` — Codex/Gemini용 공통 가이드 진입점
 
 ## Step 3: HIVE 시스템 설치
 

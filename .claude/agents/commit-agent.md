@@ -23,10 +23,12 @@ Format:
 ```
 Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore
 Rules: imperative mood, lowercase, no period, subject max 50 chars
+⚠️ **Co-Authored-By 금지**: 커밋 메시지에 `Co-Authored-By` 라인을 절대 포함하지 말 것
 
 ## Step 3: Update Changelog
 1. Read `docs/changelog/CURRENT.md`
 2. 파일 **최상단** (# 제목 바로 아래)에 새 항목 추가:
+3. 시간은 반드시 `date '+%Y-%m-%d %H:%M'` 명령으로 현재 실제 시간을 가져와서 사용할 것 (추측/하드코딩 금지)
 ```
 ### [YYYY-MM-DD HH:MM] <type>(<scope>): <description>
 - **Changes:** 변경 내용

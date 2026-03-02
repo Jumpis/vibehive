@@ -1,10 +1,14 @@
+import { useState, useMemo } from "react";
 import { useMissionStore } from "@/stores/missionStore";
 import { MissionHistoryItem } from "./MissionHistoryItem";
+import { MissionDetailPanel } from "./MissionDetailPanel";
+import type { Mission } from "@/types/mission";
 
 export function MissionHistory() {
   const missions = useMissionStore((s) => s.missions);
+  const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
 
-  const sorted = [...missions].reverse();
+  const sorted = useMemo(() => [...missions].reverse(), [missions]);
 
   if (sorted.length === 0) {
     return (
@@ -25,9 +29,16 @@ export function MissionHistory() {
       </div>
       <div className="space-y-2">
         {sorted.map((m) => (
-          <MissionHistoryItem key={m.id} mission={m} />
+          <MissionHistoryItem key={m.id} mission={m} onSelect={setSelectedMission} />
         ))}
       </div>
+
+      {selectedMission && (
+        <MissionDetailPanel
+          mission={selectedMission}
+          onClose={() => setSelectedMission(null)}
+        />
+      )}
     </div>
   );
 }

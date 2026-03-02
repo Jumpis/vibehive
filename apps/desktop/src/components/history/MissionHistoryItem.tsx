@@ -12,7 +12,12 @@ function formatDate(iso: string) {
   });
 }
 
-export function MissionHistoryItem({ mission }: { mission: Mission }) {
+interface MissionHistoryItemProps {
+  mission: Mission;
+  onSelect?: (mission: Mission) => void;
+}
+
+export function MissionHistoryItem({ mission, onSelect }: MissionHistoryItemProps) {
   const isCompleted = mission.status === "completed";
   const isFailed = mission.status === "failed";
 
@@ -46,11 +51,11 @@ export function MissionHistoryItem({ mission }: { mission: Mission }) {
 
       {mission.results.length > 0 && (
         <div className="flex gap-1.5 flex-wrap">
-          {mission.results.map((r, i) => {
+          {mission.results.map((r) => {
             const meta = AGENT_META[r.agent_id];
             return (
               <span
-                key={i}
+                key={r.agent_id}
                 className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-hive-text-dim"
                 title={r.task}
               >
@@ -60,6 +65,15 @@ export function MissionHistoryItem({ mission }: { mission: Mission }) {
             );
           })}
         </div>
+      )}
+
+      {onSelect && (
+        <button
+          onClick={() => onSelect(mission)}
+          className="mt-2 w-full text-[11px] text-hive-text-dim hover:text-hive-text py-1 rounded transition-colors hover:bg-white/5"
+        >
+          자세히 보기
+        </button>
       )}
     </GlassPanel>
   );

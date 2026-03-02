@@ -3,6 +3,7 @@ import type { Mission } from "@/types/mission";
 import { AGENT_META } from "@/lib/constants";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { MissionResultCard } from "@/components/mission/MissionResultCard";
+import { MarkdownContent } from "@/components/ui/MarkdownContent";
 import { cn } from "@/lib/cn";
 
 interface MissionDetailPanelProps {
@@ -120,9 +121,9 @@ export function MissionDetailPanel({ mission, onClose }: MissionDetailPanelProps
               <GlassPanel subtle className="p-3 space-y-3">
                 <div>
                   <span className="text-[10px] text-hive-text-dim uppercase tracking-wider">Analysis</span>
-                  <p className="text-xs text-hive-text leading-relaxed mt-1">
+                  <MarkdownContent className="text-xs text-hive-text leading-relaxed mt-1">
                     {mission.plan.analysis}
-                  </p>
+                  </MarkdownContent>
                 </div>
 
                 <div>

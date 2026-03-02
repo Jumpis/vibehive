@@ -1,6 +1,7 @@
 import type { AgentResult } from "@/types/mission";
 import { AGENT_META } from "@/lib/constants";
 import { GlassPanel } from "@/components/ui/GlassPanel";
+import { MarkdownContent } from "@/components/ui/MarkdownContent";
 
 interface MissionResultCardProps {
   result: AgentResult;
@@ -38,9 +39,9 @@ export function MissionResultCard({ result }: MissionResultCardProps) {
       </p>
 
       <div className="px-2.5 py-2 rounded-md bg-white/5 border border-hive-border max-h-40 overflow-y-auto">
-        <pre className="text-[11px] text-hive-text leading-relaxed whitespace-pre-wrap font-mono">
+        <MarkdownContent className="text-[11px] text-hive-text leading-relaxed">
           {result.result}
-        </pre>
+        </MarkdownContent>
       </div>
 
       {result.token_usage && (
